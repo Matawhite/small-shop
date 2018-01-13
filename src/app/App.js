@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Product from '../product/product'
 import logo from './logo.svg';
 import './App.css';
 import HttpService from '../services/http-service'
+
 
 const http = new HttpService()
 
@@ -27,12 +29,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to The Swag Shop</h1>
+          <h2 className="App-title">Welcome to The Swag Shop</h2>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="App-main">
+          <Product />
+        </div>
       </div>
     );
   }
