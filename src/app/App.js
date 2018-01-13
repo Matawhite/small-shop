@@ -31,8 +31,13 @@ class App extends Component {
         <header className="App-header">
           <h2 className="App-title">Welcome to The Swag Shop</h2>
         </header>
-        <div className="App-main">
-          <Product />
+        <div className="container App-main">
+          <div className="row">
+            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
+            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
+            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
+            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
+          </div>
         </div>
       </div>
     );

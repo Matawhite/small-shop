@@ -1,1 +1,13 @@
+.product {
+  width: 20rem;
+}
 
+.product img {
+  max-height: 15rem;
+}
+
+.card {
+  margin-right: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+}
