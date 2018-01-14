@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Product from '../product/product'
-import logo from './logo.svg';
+import Wishlist from '../wishlist/wishlist'
 import './App.css';
 import HttpService from '../services/http-service'
 
@@ -10,15 +10,39 @@ const http = new HttpService()
 class App extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      products: [],
+
+    }
     this.loadData = this.loadData.bind(this)
+    this.productList = this.productList.bind(this)
   }
 
   loadData = () => {
-    http.getProducts().then( products => {
-      console.log(products)
+    //the actually object here is a promise, need to capture the instance
+    const self = this
+    http.getProducts().then( data => {
+      self.setState({products: data})
     }, error => {
       console.log(error)
     })
+  }
+
+
+
+
+
+  productList = () => {
+    const list = this.state.products.map( product =>
+      <div className="col-sm-4" key={product._id}>
+        <Product
+          imgUrl={product.imgUrl}
+          title={product.title}
+          price={product.price}
+          />
+      </div>
+    )
+    return (list)
   }
 
   componentWillMount(){
@@ -31,16 +55,20 @@ class App extends Component {
         <header className="App-header">
           <h2 className="App-title">Welcome to The Swag Shop</h2>
         </header>
-        <div className="container App-main">
+        <div className="container-fluid App-main">
           <div className="row">
-            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
-            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
-            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
-            <Product className="col-sm-4" price="4.23" title="Cool Toy Gun" imgURL="https://media.kohlsimg.com/is/image/kohls/1721997?wid=1000&hei=1000&op_sharpen=1"/>
-          </div>
+            <div className="col-sm-8">
+                <div className="row">
+                  {this.productList()}
+                </div>
+            </div>
+            <div className="col-sm-4">
+              <Wishlist />
+            </div>
         </div>
       </div>
-    );
+    </div>
+    )
   }
 }
 
