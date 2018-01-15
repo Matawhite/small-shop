@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import './wishlist.css'
 import ProductCondensed from '../condensedProduct/productCondensed'
+import DataService from '../services/data-service'
+import NotificationService, {NOTIF_WISHLIST_CHANGED} from '../services/notification-service'
+
+const ns = new NotificationService()
 
 class Wishlist extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      wishlist: [
-        {
-          title: 'Bolgogna Killer',
-          price: 23.99,
-          _id: 'SKLKJHK199810'
-        },
-        {
-          title: 'Bolgogna Killer',
-          price: 23.99,
-          _id: 'SKLKJHK1998911'
-        },
-        {
-          title: 'Bolgogna Killer',
-          price: 23.99,
-          _id: 'SKLKJHK1998912'
-        },
-
-      ]
+      wishlist: []
     }
 
     this.createWishList = this.createWishList.bind(this)
+    this.onWishListChanged = this.onWishListChanged.bind(this)
+  }
+
+  componentDidMount(){
+    ns.addObserver(NOTIF_WISHLIST_CHANGED, this, this.onWishListChanged)
+  }
+
+  componentWillUnount(){
+    ns.removeObserver(this, NOTIF_WISHLIST_CHANGED)
+  }
+
+  onWishListChanged(newWishList){
+    this.setState({wishlist:newWishList})
   }
 
   createWishList = () => {

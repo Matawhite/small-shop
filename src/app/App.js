@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   loadData = () => {
-    //the actually object here is a promise, need to capture the instance
+    //object here is a promise, need to capture the instance of the component
     const self = this
     http.getProducts().then( data => {
       self.setState({products: data})
@@ -28,18 +28,10 @@ class App extends Component {
     })
   }
 
-
-
-
-
   productList = () => {
     const list = this.state.products.map( product =>
       <div className="col-sm-4" key={product._id}>
-        <Product
-          imgUrl={product.imgUrl}
-          title={product.title}
-          price={product.price}
-          />
+        <Product product={product}/>
       </div>
     )
     return (list)
